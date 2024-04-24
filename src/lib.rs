@@ -1,4 +1,5 @@
-mod alphabet;
+mod lookup_table;
+mod encoder;
 
 pub fn add(left: usize, right: usize) -> usize {
     left + right
