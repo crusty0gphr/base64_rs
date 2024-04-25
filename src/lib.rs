@@ -1,17 +1,13 @@
-mod lookup_table;
-mod encoder;
+use std::io;
 
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+mod decoder;
+mod encoder;
+mod lookup_table;
+
+pub fn encode(input: String) -> String {
+    encoder::encode(input)
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+pub fn decode(input: String) -> Result<String, io::Error> {
+    decoder::decode(input)
 }

@@ -28,7 +28,7 @@ fn shift_bytes_per_chunk(chunk: &[u8]) -> Vec<u8> {
 
 // encoder per chunk
 // converts base64_id to base64_char
-fn encode_chunks(chunk: Vec<u8>) -> Vec<char> {
+fn encode_chunk(chunk: Vec<u8>) -> Vec<char> {
     let mut out = vec![LookupTable.get_padding(); 4];
 
     for i in 0..chunk.len() {
@@ -50,7 +50,7 @@ pub fn encode(input: String) -> String {
         .map(shift_bytes_per_chunk)
         // iterate through shifted chunks and replace witch chars from the lookup table
         // Example: ascii_chunk[99 114 117] => base64_chunk[24 55 9] => base64_chars[Y 3 J]
-        .flat_map(|chunk| encode_chunks(chunk));
+        .flat_map(|chunk| encode_chunk(chunk));
 
     String::from_iter(encoded)
 }
@@ -79,7 +79,4 @@ mod test {
             assert_eq!(res, exp);
         }
     }
-
-    #[test]
-    fn test_shift_bytes() {}
 }
